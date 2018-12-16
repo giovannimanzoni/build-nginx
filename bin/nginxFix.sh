@@ -21,9 +21,12 @@ echo
 cd $CDIR
 cd nginx-$NGINX_V/src/http/
 echo "- Hide Nginx web server string"
-sed -i 's@Server: nginx@Imaging Agency Front End Web Server@' ngx_http_header_filter_module.c
-sed -i 's@Server: " NGINX_VER CRLF;@Imaging Agency Front End Web Server" CRLF;@' ngx_http_header_filter_module.c
-sed -i 's/\<center\>.*\<center\>/center>Imaging Agency Front End Web Server<\/center/g' ngx_http_special_response.c
+sed -i 's@Server: nginx@Imaging Agency Frontend Web Server@' ngx_http_header_filter_module.c
+sed -i 's@Server: " NGINX_VER CRLF;@Imaging Agency Frontend Web Server" CRLF;@' ngx_http_header_filter_module.c
+sed -i '1,/" NGINX_VER "/s/" NGINX_VER "/Imaging Agency Frontend Web Server/' ngx_http_special_response.c
+sed -i '1,/" NGINX_VER_BUILD "/s/" NGINX_VER_BUILD "/Imaging Agency Frontend Web Server/' ngx_http_special_response.c
+sed -i 's/<center>nginx<\/center>/<center>Imaging Agency Backend Web Server<\/center>/g' ngx_http_special_response.c
+
 
 echo
 echo "Ok"

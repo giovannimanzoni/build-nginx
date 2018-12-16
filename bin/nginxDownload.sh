@@ -8,8 +8,8 @@ echo
 #controllo che venga passato il nome dell'utente con cui compilare Nginx
 if [ $# -ne 5 ]; then
   echo "Non hai inserito la versione desiderata dei pacchetti"
-  echo " esempio: ./frontendNginxDownload.sh NGINX_VERSION PCRE_VERSION OPENSSL_VERSION ZLIB_VERSION CDIR"
-  echo " esempio: ./frontendNginxDownload.sh 1.13.0 8.40 1.1.0e 1.2.11 /home/compila/nginx"
+  echo " esempio: ./nginxDownload.sh NGINX_VERSION PCRE_VERSION OPENSSL_VERSION ZLIB_VERSION CDIR"
+  echo " esempio: ./nginxDownload.sh 1.13.0 8.40 1.1.0e 1.2.11 /home/compila/nginx"
   echo
   exit 0
 fi

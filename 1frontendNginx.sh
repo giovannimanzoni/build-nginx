@@ -1,20 +1,25 @@
-#!/bin/sh
-# Compila Nginx come Frontend
-#   richiede apt-get update && apt-get install libgoogle-perftools-dev libxml2-dev libxslt1-dev libxslt1.1 libgeoip-dev checkinstall
-
+#!/bin/bash
+# Build Nginx as frontend
+#   on host require
+#       apt update && apt-get install libgoogle-perftools-dev libxml2-dev libxslt1-dev libxslt1.1 libgeoip-dev checkinstall
+# ---------------------
+#   on target require:
+#       apt update && apt install libxslt1.1 libgoogle-perftools4
+#       mkdir -p /srv/front/logs/runtime/
+#       touch /srv/front/logs/runtime/nginx_x.yy.z_error.log
+#       mkdir -p /srv/front/conf/common/
+#       nano /srv/front/conf/common/upstream-cache.conf
 
 
 echo
-
-
 echo
-echo ">>> PROCEDURA PER COMPILARE Nginx COME FRONTEND ! <<<"
+echo ">>> Nginx frontend <<<"
 echo
 #controllo che venga passato il nome dell'utente con cui compilare Nginx
 if [ $# -ne 4 ]; then
-  echo "Non hai inserito la versione desiderata dei pacchetti"
-  echo " esempio: ./1frontendNginx.sh NGINX_VERSION PCRE_VERSION OPENSSL_VERSION ZLIB_VERSION"
-  echo " esempio: ./1frontendNginx.sh 1.13.0 8.40 1.1.0e 1.2.11"
+  echo "You have to insert packages version to use."
+  echo " example: ./1frontendNginx.sh NGINX_VERSION PCRE1_VERSION OPENSSL_VERSION ZLIB_VERSION"
+  echo " example: ./1frontendNginx.sh 1.15.7 8.42 1.1.1a 1.2.11"
   echo
   exit 0
 fi
@@ -25,12 +30,12 @@ PCRE_V=$2
 OPENSSL_V=$3
 ZLIB_V=$4
 
-#directory di compilazione
-CDIR=/home/compila/build
+#build folder
+CDIR=$(pwd)/build
 mkdir -p $CDIR/frontend
 
 
-#pulizia cartelle di compilazione
+# clean build folders (if you break this script or it do not reach the end)
 cd $CDIR/frontend
 rm -rf nginx-$NGINX_V > /dev/null 2>&1
 rm -rf pcre-$PCRE_V > /dev/null 2>&1
@@ -45,7 +50,7 @@ cd bin
 ./frontendNginxCompile.sh $NGINX_V $PCRE_V $OPENSSL_V $ZLIB_V $CDIR
 
 
-#pulizia cartelle di compilazione
+# clean build folders
 cd $CDIR/frontend
 rm -rf nginx-$NGINX_V > /dev/null 2>&1
 rm -rf pcre-$PCRE_V > /dev/null 2>&1
@@ -54,7 +59,7 @@ rm -rf zlib-$ZLIB_V > /dev/null 2>&1
 cd $CDIR
 
 echo
-echo "Procedura completata"
+echo "ok."
 echo
 
 
