@@ -44,7 +44,11 @@ for example ./2backendNginx.sh 1.15.7 8.42
 **Target requirements**
 
         apt update && apt install ?? (I never run it without nginxfront on same server)
-        mkdir /srv/back/logs/runtime/
+        mkdir -p /srv/back/logs/runtime/
+        mkdir /srv/back/conf/common/
+        mkdir /srv/back/conf/sites-availables/
+        mkdir /srv/back/conf/sites-enabled/
+
 
 **Run**
 Script tell you where the packege will be created. You can use this my repository for handle Nginx as service : https://github.com/giovannimanzoni/nginx-sysvinit-script
